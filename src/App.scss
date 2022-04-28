@@ -1,0 +1,94 @@
+@import "./common/colors.scss";
+@import "./common/utilities.scss";
+
+/*RESET */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+html,
+body {
+	height: 100%;
+	max-width: 100vw;
+}
+body {
+	line-height: 1.5;
+	color: $font-primary-color;
+	font-family: "Akshar", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	background-color: $primary-color;
+	scroll-behavior: smooth;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+#root,
+#__next {
+	isolation: isolate;
+}
+a {
+	text-decoration: none;
+}
+
+/* Composition */
+
+.split {
+	display: flex;
+}
+
+.split-vert{
+	display: flex;
+	flex-direction: column;
+}
+
+/* Utilities */
+
+.pad-thin-sides {
+	padding: $pad-thin-sides;
+}
+.pad-med-sides {
+	padding: $pad-med-sides;
+}
+.pad-thick-sides {
+	padding: $pad-thick-sides;
+}
+
+/* Specifics */
+.App{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 5em 30em 1fr 10em;
+	gap: 5px 5px;
+	grid-template-areas:
+		"Nav"
+		"Main"
+		"Footer";
+}
+::-webkit-scrollbar {
+    display: none;
+}

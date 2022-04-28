@@ -1,0 +1,108 @@
+$duration: 250ms;
+
+.slider {
+	z-index: 999;
+	overflow: visible;
+	transition: $duration all;
+	margin-bottom: 2rem;
+
+	.list-title {
+		position: relative;
+		left: 2rem;
+	}
+}
+
+.swiper {
+	width: 100%;
+	overflow: visible;
+
+	.title {
+		position: absolute;
+		font-size: 1.5rem;
+		top: 2rem;
+		left: 2rem;
+		color: #fff;
+	}
+}
+
+.swiper-slide {
+	text-align: center;
+	transition: $duration all;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+
+	.title {
+		text-align: left;
+		position: absolute;
+		font-size: 1.4rem;
+		top: 0.5rem;
+		left: 1rem;
+		color: #fff;
+		text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000, 0px 0px 20px #000000, 0px 0px 40px #000000;
+	}
+
+	.rating {
+		position: absolute;
+		font-size: 1.2rem;
+		bottom: 0.5rem;
+		right: 2rem;
+		color: #fff;
+		text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000, 0px 0px 20px #000000, 0px 0px 40px #000000;
+	}
+
+	.rating-star{
+		color: #FFD700;
+		filter: drop-shadow(0px 0px 5px #000000);
+	}	
+}
+
+.swiper-button-next, .swiper-button-prev {
+	position: absolute;
+	top: 0%;
+	width: 4rem;
+	height: 100%;
+	margin-top: 0;
+	z-index: 10;	
+	color: #fff;
+	//pointer-events: none;
+}
+.swiper-button-next{
+	right: 0rem;
+	justify-content: flex-end;
+	background: linear-gradient(90deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.8) 70%, rgba(20,20,20,1) 100%);
+}
+.swiper-button-prev{
+	left: 0rem;
+	justify-content: flex-start;
+	text-align: right;
+	background: linear-gradient(270deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.8) 70%, rgba(20,20,20,1) 100%);
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+	width: 1.2rem;
+    font-family: swiper-icons;
+    font-size: 1.4rem;
+    text-transform: none!important;
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant: initial;
+    line-height: 1;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

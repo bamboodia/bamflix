@@ -1,0 +1,10 @@
+@import "../../common/colors.scss";
+@import "../../common/utilities.scss";
+
+.footer {
+	grid-area: 4 / 1 / 5 / 2;
+	background: $secondary-color;
+	justify-content: center;
+    align-items: center;
+    color: $font-primary-color;
+}

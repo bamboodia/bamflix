@@ -1,0 +1,17 @@
+$duration: 250ms;
+
+.movie-card {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	transition: $duration all;
+
+	.title {
+		position: absolute;
+		font-size: 1.5rem;
+		top: 2rem;
+		left: 2rem;
+		color: #fff;
+	}
+}
+
