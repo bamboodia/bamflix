@@ -1,43 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MovieSlider from '../../common/MovieSlider'
-import { getMovies } from "../../store/moviesSlice";
+import MovieSlider from "../../common/MovieSlider";
+import { getMovies, selectMovies } from "../../store/moviesSlice";
 import "./Home.scss";
 
 const Home = () => {
 	const options = useSelector((state) => state.options);
-	const { searchTerm, genres, type } = options;
-	const selectedMovies = useSelector((state) => state.movies);
-	console.log(selectedMovies)
-	const { isLoading, error, movies } = selectedMovies;
 	const dispatch = useDispatch();
-		
+	const selectedMovies = useSelector(selectMovies);
+
+	const { isLoading } = selectedMovies;
 
 	useEffect(() => {
-		dispatch(getMovies(searchTerm));
-	}, [dispatch, searchTerm]);
-
-	
+		dispatch(getMovies());
+	}, [dispatch]);
 
 	if (isLoading) {
-		return <div className="">Loading</div>;
-	}
-
-	if (error) {
 		return (
-			<div className="error">
-				<h2>Failed to load movies.</h2>
-				<button type="button" onClick={() => dispatch(getMovies(searchTerm))}>
-					Try again
-				</button>
+			<div className="loading">
+				<div className="lds-ellipsis">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div id="main" className="main">			
+		<div id="main" className="main">
 			<div className="sliders">
-			<MovieSlider />			
+				<MovieSlider movies={selectedMovies.movies.hotMovies} title={"Hot Movies"} />
+				<MovieSlider movies={selectedMovies.movies.newMovies} title={"New Movies"} />
 			</div>
 		</div>
 	);

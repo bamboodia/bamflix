@@ -24,10 +24,11 @@ $duration: 250ms;
 		color: #fff;
 	}
 }
-
+.swiper-wrapper {
+	padding: 2rem 0;
+}
 .swiper-slide {
 	text-align: center;
-	transition: $duration all;
 	/* Center slide text vertically */
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -41,6 +42,7 @@ $duration: 250ms;
 	-ms-flex-align: center;
 	-webkit-align-items: center;
 	align-items: center;
+	border-radius: 0.25em;
 
 	.title {
 		text-align: left;
@@ -65,6 +67,16 @@ $duration: 250ms;
 		color: #FFD700;
 		filter: drop-shadow(0px 0px 5px #000000);
 	}	
+
+	&:hover{
+		
+		transition: $duration all;
+		transition-delay: 500ms;
+		transform: scale(1.2);
+		z-index: 1;			
+	}
+
+	
 }
 
 .swiper-button-next, .swiper-button-prev {

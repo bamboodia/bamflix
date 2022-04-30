@@ -4,6 +4,7 @@ $duration: 250ms;
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	border-radius: 0.25em;
 	transition: $duration all;
 
 	.title {

@@ -8,6 +8,7 @@ import Hero from "./components/Hero/Hero";
 import "./App.scss";
 
 function App() {
+	
 	return (
 		<div className="App">
 			<Router>

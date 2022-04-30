@@ -67,7 +67,13 @@ a {
 }
 
 /* Utilities */
-
+.css-transitions-only-after-page-load * {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+  }
 .pad-thin-sides {
 	padding: $pad-thin-sides;
 }

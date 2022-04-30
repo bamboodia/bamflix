@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMovies } from "../common/apis/movieApi";
+import { fetchHotMovies, fetchMovieDetails, fetchNewMovies } from "../common/apis/movieApi";
 
 const initialState = {
-	movies: [],
+	movies: { hotMovies: [[]], newMovies: [[]] },
+	hotMovies: [],
+	newMovies: [],
 	error: false,
 	isLoading: false,
 };
@@ -18,37 +20,75 @@ const moviesSlice = createSlice({
 		getMoviesFailed(state) {
 			state.isLoading = false;
 			state.error = true;
-		},
+		},		
 		setMovies: (state, action) => {
 			state.isLoading = false;
 			state.error = false;
-			state.movies = action.payload;
+			state.movies = action.payload;			
+		},
+		toggleMovieDetails: (state, action) => {
+			state.hotMovies[action.payload].showingDetails = !state.hotMovies[action.payload].showingDetails;
+		},
+		getMovieDetailsLoading: (state) => {
+			state.movieDetailsFailed = false;
+			state.movieDetailsLoading = true;
+		},
+		setMovieDetails: (state, action) => {
+			state.movieDetailsFailed = false;
+			state.movieDetailsLoading = false;
+			state.movieDetails = action.payload;
+		},
+		getMovieDetailsFailed: (state) => {
+			state.movieDetailsFailed = true;
+			state.movieDetailsLoading = false;
 		},
 	},
 });
 
-export const { getMoviesLoading, getMoviesFailed, setMovies } = moviesSlice.actions;
+export const { getMoviesLoading, getMoviesFailed, setMovies, getMovieDetailsLoading, setMovieDetails, getMovieDetailsFailed, setNewMovies, toggleMovieDetails } = moviesSlice.actions;
 
 export default moviesSlice.reducer;
 
-export const getMovies = (searchTerm) => async (dispatch) => {
+export const getMovies = () => async (dispatch) => {
 	try {
 		dispatch(getMoviesLoading());
-		const moviesPageOne = await fetchMovies(searchTerm, 1);
-		const moviesPageTwo = await fetchMovies(searchTerm, 2);
-		const movies = moviesPageOne.concat(moviesPageTwo);
-		const moviesWithData = movies.map((movie) => ({
+		const movies = { hotMovies: [], newMovies:[] };
+		const hotMovies = await fetchHotMovies(1);
+		const hotMoviesWithData = hotMovies.map((movie) => ({
 			...movie,
-			showingPlot: false,
-			Plot: "",
-			loadingPlot: false,
-			errorPlot: false,
+			showingDetails: false,
+			details: [],
+			loadingDetails: false,
+			errorDetails: false,
 		}));
-		const verified = moviesWithData.filter((movie) => movie.backdrop_path !== null);
-		dispatch(setMovies(verified));
+		const hotMoviesValid = hotMoviesWithData.filter((movie) => movie.backdrop_path !== null);
+		const newMovies = await fetchNewMovies();
+		const newMoviesWithData = newMovies.map((movie) => ({
+			...movie,
+			showingDetails: false,
+			details: [],
+			loadingDetails: false,
+			errorDetails: false,
+		}));
+		const newMoviesValid = newMoviesWithData.filter((movie) => movie.backdrop_path !== null);
+		console.log(newMoviesValid);
+		movies.hotMovies.push(hotMoviesValid);
+		movies.newMovies.push(newMoviesValid);
+		console.log(movies);
+		dispatch(setMovies(movies));
 	} catch (err) {
+		console.log(err);
 		dispatch(getMoviesFailed());
 	}
 };
 
-export const selectMovies = (state) => state.movies.movies;
+export const getMovieDetails = (index, id) => async (dispatch) => {
+	try {
+		const movieDetails = await fetchMovieDetails(id);
+		console.log(movieDetails);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const selectMovies = (state) => state.movies;
