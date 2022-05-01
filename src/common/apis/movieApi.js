@@ -29,5 +29,6 @@ export const fetchMovieDetails = async (id) => {
 	const response = await movieApi.get(`/movie/${id}?api_key=${APIKey}&language=en-US`).catch((err) => {
 		console.log("Err :", err);
 	});
-	return response
+	console.log(response.data)
+	return response.data
 }

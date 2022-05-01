@@ -3,8 +3,7 @@ import { fetchHotMovies, fetchMovieDetails, fetchNewMovies } from "../common/api
 
 const initialState = {
 	movies: { hotMovies: [[]], newMovies: [[]] },
-	hotMovies: [],
-	newMovies: [],
+	details: {},
 	error: false,
 	isLoading: false,
 };
@@ -20,11 +19,11 @@ const moviesSlice = createSlice({
 		getMoviesFailed(state) {
 			state.isLoading = false;
 			state.error = true;
-		},		
+		},
 		setMovies: (state, action) => {
 			state.isLoading = false;
 			state.error = false;
-			state.movies = action.payload;			
+			state.movies = action.payload;
 		},
 		toggleMovieDetails: (state, action) => {
 			state.hotMovies[action.payload].showingDetails = !state.hotMovies[action.payload].showingDetails;
@@ -36,7 +35,7 @@ const moviesSlice = createSlice({
 		setMovieDetails: (state, action) => {
 			state.movieDetailsFailed = false;
 			state.movieDetailsLoading = false;
-			state.movieDetails = action.payload;
+			state.details = action.payload.movieDetails;
 		},
 		getMovieDetailsFailed: (state) => {
 			state.movieDetailsFailed = true;
@@ -52,12 +51,11 @@ export default moviesSlice.reducer;
 export const getMovies = () => async (dispatch) => {
 	try {
 		dispatch(getMoviesLoading());
-		const movies = { hotMovies: [], newMovies:[] };
+		const movies = { hotMovies: [], newMovies: [] };
 		const hotMovies = await fetchHotMovies(1);
 		const hotMoviesWithData = hotMovies.map((movie) => ({
 			...movie,
 			showingDetails: false,
-			details: [],
 			loadingDetails: false,
 			errorDetails: false,
 		}));
@@ -66,15 +64,12 @@ export const getMovies = () => async (dispatch) => {
 		const newMoviesWithData = newMovies.map((movie) => ({
 			...movie,
 			showingDetails: false,
-			details: [],
 			loadingDetails: false,
 			errorDetails: false,
 		}));
 		const newMoviesValid = newMoviesWithData.filter((movie) => movie.backdrop_path !== null);
-		console.log(newMoviesValid);
 		movies.hotMovies.push(hotMoviesValid);
 		movies.newMovies.push(newMoviesValid);
-		console.log(movies);
 		dispatch(setMovies(movies));
 	} catch (err) {
 		console.log(err);
@@ -82,10 +77,12 @@ export const getMovies = () => async (dispatch) => {
 	}
 };
 
-export const getMovieDetails = (index, id) => async (dispatch) => {
+export const fetchDetails = (index, id) => async (dispatch) => {
 	try {
+		dispatch(getMovieDetailsLoading(index))
 		const movieDetails = await fetchMovieDetails(id);
 		console.log(movieDetails);
+		dispatch(setMovieDetails({index, movieDetails}));
 	} catch (err) {
 		console.log(err);
 	}

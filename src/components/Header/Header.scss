@@ -2,10 +2,12 @@
 @import "../../common/utilities.scss";
 
 .header {
-	grid-area: 1 / 1 / 2 / 2;
+	position: fixed;
+	height: 5em;
+	width: 100%;
 	background-color: transparent;
-	background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,1) 100%);
-	padding: $pad-thick-sides;	
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 1) 100%);
+	padding: $pad-thick-sides;
 	align-items: center;
 	justify-content: space-between;
 	z-index: 3;
@@ -17,12 +19,12 @@
 		font-weight: 300;
 	}
 
-	li{
+	li {
 		display: block;
 		list-style-type: none;
 	}
 
-	a{
+	a {
 		color: #fff;
 	}
 }
