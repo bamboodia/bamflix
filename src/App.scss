@@ -83,12 +83,14 @@ a {
 .pad-thick-sides {
 	padding: $pad-thick-sides;
 }
-
+.text-shadow{
+	text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000, 0px 0px 20px #000000, 0px 0px 40px #000000;
+}
 /* Specifics */
 .App{
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 5em 30em 1fr 10em;
+	grid-template-rows: 5em 25em 5em 1fr 10em;
 	gap: 5px 5px;
 	grid-template-areas:
 		"Nav"

@@ -24,22 +24,34 @@ const Header = () => {
 			</Link>
 			<ul>
 				<li>
-					<a href="">Home</a>
+					<Link to="/">
+						<span>Home</span>
+					</Link>
 				</li>
 				<li>
-					<a href="">Series</a>
+					<Link to="/">
+						<span>Series</span>
+					</Link>
 				</li>
 				<li>
-					<a href="">Films</a>
+					<Link to="/">
+						<span>Films</span>
+					</Link>
 				</li>
 				<li>
-					<a href="">New & Popular</a>
+					<Link to="/">
+						<span>New & Popular</span>
+					</Link>
 				</li>
 				<li>
-					<a href="">My List</a>
+					<Link to="/">
+						<span>My List</span>
+					</Link>
 				</li>
 				<li>
-					<a href="">Audio & Subtitles</a>
+					<Link to="/">
+						<span>Audio & Subtitles</span>
+					</Link>
 				</li>
 			</ul>
 			<div className="user-image">

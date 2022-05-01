@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchHotMovies, fetchMovieDetails, fetchNewMovies } from "../common/apis/movieApi";
+import { fetchHotMovies, fetchMovieDetails, fetchNewMovies, fetchCast } from "../common/apis/movieApi";
 
 const initialState = {
 	movies: { hotMovies: [[]], newMovies: [[]] },
 	details: {},
+	showingDetails: false,
+	movieDetailsFailed: false,
+	movieDetailsLoading: false,
 	error: false,
 	isLoading: false,
 };
@@ -26,7 +29,7 @@ const moviesSlice = createSlice({
 			state.movies = action.payload;
 		},
 		toggleMovieDetails: (state, action) => {
-			state.hotMovies[action.payload].showingDetails = !state.hotMovies[action.payload].showingDetails;
+			state.showingDetails = !state.showingDetails;
 		},
 		getMovieDetailsLoading: (state) => {
 			state.movieDetailsFailed = false;
@@ -41,10 +44,13 @@ const moviesSlice = createSlice({
 			state.movieDetailsFailed = true;
 			state.movieDetailsLoading = false;
 		},
+		closeModal: (state, action) => {
+			state.showingDetails = false;
+		},
 	},
 });
 
-export const { getMoviesLoading, getMoviesFailed, setMovies, getMovieDetailsLoading, setMovieDetails, getMovieDetailsFailed, setNewMovies, toggleMovieDetails } = moviesSlice.actions;
+export const { getMoviesLoading, getMoviesFailed, setMovies, getMovieDetailsLoading, setMovieDetails, getMovieDetailsFailed, setNewMovies, toggleMovieDetails, closeModal } = moviesSlice.actions;
 
 export default moviesSlice.reducer;
 
@@ -53,21 +59,9 @@ export const getMovies = () => async (dispatch) => {
 		dispatch(getMoviesLoading());
 		const movies = { hotMovies: [], newMovies: [] };
 		const hotMovies = await fetchHotMovies(1);
-		const hotMoviesWithData = hotMovies.map((movie) => ({
-			...movie,
-			showingDetails: false,
-			loadingDetails: false,
-			errorDetails: false,
-		}));
-		const hotMoviesValid = hotMoviesWithData.filter((movie) => movie.backdrop_path !== null);
+		const hotMoviesValid = hotMovies.filter((movie) => movie.backdrop_path !== null);
 		const newMovies = await fetchNewMovies();
-		const newMoviesWithData = newMovies.map((movie) => ({
-			...movie,
-			showingDetails: false,
-			loadingDetails: false,
-			errorDetails: false,
-		}));
-		const newMoviesValid = newMoviesWithData.filter((movie) => movie.backdrop_path !== null);
+		const newMoviesValid = newMovies.filter((movie) => movie.backdrop_path !== null);
 		movies.hotMovies.push(hotMoviesValid);
 		movies.newMovies.push(newMoviesValid);
 		dispatch(setMovies(movies));
@@ -79,12 +73,15 @@ export const getMovies = () => async (dispatch) => {
 
 export const fetchDetails = (index, id) => async (dispatch) => {
 	try {
-		dispatch(getMovieDetailsLoading(index))
+		dispatch(getMovieDetailsLoading());
 		const movieDetails = await fetchMovieDetails(id);
-		console.log(movieDetails);
-		dispatch(setMovieDetails({index, movieDetails}));
+		const movieCast = await fetchCast(id);
+		console.log(movieCast);		
+		dispatch(setMovieDetails({ movieDetails }));
+		dispatch(toggleMovieDetails());
 	} catch (err) {
 		console.log(err);
+		dispatch(getMovieDetailsFailed());
 	}
 };
 

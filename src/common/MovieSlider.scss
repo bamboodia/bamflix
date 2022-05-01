@@ -1,7 +1,7 @@
 $duration: 250ms;
 
 .slider {
-	z-index: 999;
+	z-index: 3;
 	overflow: visible;
 	transition: $duration all;
 	margin-bottom: 2rem;
@@ -80,7 +80,7 @@ $duration: 250ms;
 	width: 4rem;
 	height: 100%;
 	margin-top: 0;
-	z-index: 10;
+	z-index: 3;
 	color: #fff;
 	//pointer-events: none;
 }
