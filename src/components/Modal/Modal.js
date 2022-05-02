@@ -21,14 +21,14 @@ const Modal = () => {
 					<img src={imgUrl} alt="" />
 				</div>{" "}
 				<div className="title">
-					<div className="text-shadow">{details.title}</div>
+					<div className="text-shadow">{details.title || details.name}</div>
 					<div className="tagline text-shadow">{details.tagline}</div>
 				</div>
 				<FontAwesomeIcon className="exit-modal" icon={faXmark} onClick={() => dispatch(toggleMovieDetails())} />
 				<div className="details">
 					<div className="info">
 						<div className="meta split">
-							<div className="year meta-child">
+							<div className="year meta-child">								
 								<FontAwesomeIcon icon={faCalendarDays} /> {details.release_date.slice(0, -6)}
 							</div>{" "}
 							<div className="runtime meta-child">

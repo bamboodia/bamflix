@@ -22,37 +22,22 @@ const Header = () => {
 				{" "}
 				<div className="logo">BAMFLIX</div>
 			</Link>
-			<ul>
+			<ul>				
 				<li>
-					<Link to="/">
-						<span>Home</span>
-					</Link>
-				</li>
-				<li>
-					<Link to="/">
-						<span>Series</span>
-					</Link>
-				</li>
-				<li>
-					<Link to="/">
+					<Link to="/films">
 						<span>Films</span>
+					</Link>
+				</li>
+				<li>
+					<Link to="/tv">
+						<span>TV</span>
 					</Link>
 				</li>
 				<li>
 					<Link to="/">
 						<span>New & Popular</span>
 					</Link>
-				</li>
-				<li>
-					<Link to="/">
-						<span>My List</span>
-					</Link>
-				</li>
-				<li>
-					<Link to="/">
-						<span>Audio & Subtitles</span>
-					</Link>
-				</li>
+				</li>				
 			</ul>
 			<div className="user-image">
 				<img src={user} alt="user" />

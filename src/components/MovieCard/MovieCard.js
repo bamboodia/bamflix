@@ -10,9 +10,9 @@ const MovieCard = (props) => {
 
 	return (
 		<div className="movie-card" onClick={() => onToggleDetails(movie.id)}>
-			<div className="title">{movie.title}</div>
+			<div className="title">{movie.title || movie.name}</div>
 			<div className="">
-				<img src={imgUrl} alt={movie.Title} />
+				<img src={imgUrl} alt={movie.title} />
 			</div>			
 		</div>
 	);

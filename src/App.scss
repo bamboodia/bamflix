@@ -91,16 +91,7 @@ a {
 	box-shadow: 0px 0px 15px 5px #000000;
 }
 /* Specifics */
-.App {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 5em 25em 5em 1fr 10em;
-	gap: 5px 5px;
-	grid-template-areas:
-		"Nav"
-		"Main"
-		"Footer";
-}
+
 ::-webkit-scrollbar {
 	display: none;
 }
