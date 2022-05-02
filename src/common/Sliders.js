@@ -11,7 +11,6 @@ import { fetchDetails, fetchTVDetails } from "../store/moviesSlice";
 export const MovieSlider = (props) => {
 	const { title, movies } = props;
 	const dispatch = useDispatch();
-
 	const onToggleDetails = (index) => {
 		const getDetails = (id) => {
 			dispatch(fetchDetails(index, id));
@@ -24,7 +23,34 @@ export const MovieSlider = (props) => {
 			<div className="list-title">
 				<h2>{title}</h2>
 			</div>
-			<Swiper initialSlide={1} slidesPerView={6} spaceBetween={10} slidesPerGroup={6} loop={true} loopFillGroupWithBlank={false} navigation={true} modules={[Navigation]} className="mySwiper">
+			<Swiper
+				initialSlide={1}
+				slidesPerView={2}
+				spaceBetween={10}
+				slidesPerGroup={2}
+				loop={true}
+				loopFillGroupWithBlank={false}
+				navigation={true}
+				breakpoints={{
+					540: {
+						slidesPerView: 3,
+						slidesPerGroup: 3,
+					},
+					768: {
+						slidesPerView: 4,
+						slidesPerGroup: 4,
+					},
+					1024: {
+						slidesPerView: 5,
+						slidesPerGroup: 5,
+					},
+					1440:{
+						slidesPerView: 6,
+						slidesPerGroup: 6,
+					}
+				}}
+				modules={[Navigation]}
+				className="mySwiper">
 				{movies[0].map((movie, index) => (
 					<SwiperSlide key={movie.id}>
 						<MovieCard movie={movie} index={index} onToggleDetails={onToggleDetails(index)} />
@@ -51,7 +77,34 @@ export const TVSlider = (props) => {
 			<div className="list-title">
 				<h2>{title}</h2>
 			</div>
-			<Swiper initialSlide={1} slidesPerView={6} spaceBetween={10} slidesPerGroup={6} loop={true} loopFillGroupWithBlank={false} navigation={true} modules={[Navigation]} className="mySwiper">
+			<Swiper
+				initialSlide={1}
+				slidesPerView={2}
+				spaceBetween={10}
+				slidesPerGroup={2}
+				loop={true}
+				loopFillGroupWithBlank={false}
+				navigation={true}
+				breakpoints={{
+					540: {
+						slidesPerView: 3,
+						slidesPerGroup: 3,
+					},
+					768: {
+						slidesPerView: 4,
+						slidesPerGroup: 4,
+					},
+					1024: {
+						slidesPerView: 5,
+						slidesPerGroup: 5,
+					},
+					1440:{
+						slidesPerView: 6,
+						slidesPerGroup: 6,
+					}
+				}}
+				modules={[Navigation]}
+				className="mySwiper">
 				{movies[0].map((movie, index) => (
 					<SwiperSlide key={movie.id}>
 						<MovieCard movie={movie} index={index} onToggleDetails={onToggleDetails(index)} />

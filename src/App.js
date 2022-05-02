@@ -1,13 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Home, Films, TV } from "./components/browse/Home";
 import "./App.scss";
-import { selectMovies } from "./store/moviesSlice";
 
 function App() {
-	const selector = useSelector(selectMovies);
-	const { showingDetails } = selector;
 
 	return (
 		<div className="App">

@@ -28,7 +28,7 @@ const Modal = () => {
 				<div className="details">
 					<div className="info">
 						<div className="meta split">
-							<div className="year meta-child">								
+							<div className="year meta-child">
 								<FontAwesomeIcon icon={faCalendarDays} /> {details.release_date.slice(0, -6)}
 							</div>{" "}
 							<div className="runtime meta-child">

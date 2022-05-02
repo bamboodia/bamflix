@@ -42,3 +42,37 @@
 	background-color: #bbd4ff;
 	border-radius: 20%;
 }
+@media only screen and (max-width: 1024px) {
+	.header {		
+		height: 5em;		
+		padding: 0 1em;
+		justify-content: space-between;
+	
+		ul {
+			gap: 1rem;
+		}	
+	}
+}
+@media only screen and (max-width: 768px) {
+	.header {		
+		height: 5em;		
+		padding: 0 1em;
+		justify-content: space-between;
+	
+		ul {
+			gap: 1rem;
+		}	
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.header {		
+		height: 5em;		
+		padding: 0 1em;
+		justify-content: space-between;
+	
+		ul {
+			gap: 1rem;
+		}	
+	}
+}

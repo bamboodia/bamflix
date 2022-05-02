@@ -1,4 +1,4 @@
-.app-container{
+.app-container {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 5em 25em 5em 1fr 10em;
@@ -77,3 +77,28 @@
 		transform: translate(24px, 0);
 	}
 }
+@media only screen and (max-width: 1024px) {
+	.app-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 5em 30vh 5em 1fr 10em;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.app-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 5em 25vh 5em 1fr 10em;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.app-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 5em 15vh 5em 1fr 10em;
+	}
+}
+
+
+
+
