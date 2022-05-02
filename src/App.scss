@@ -61,7 +61,7 @@ a {
 	display: flex;
 }
 
-.split-vert{
+.split-vert {
 	display: flex;
 	flex-direction: column;
 }
@@ -73,7 +73,7 @@ a {
 	-ms-transition: none !important;
 	-o-transition: none !important;
 	transition: none !important;
-  }
+}
 .pad-thin-sides {
 	padding: $pad-thin-sides;
 }
@@ -83,11 +83,15 @@ a {
 .pad-thick-sides {
 	padding: $pad-thick-sides;
 }
-.text-shadow{
+.text-shadow {
 	text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000, 0px 0px 20px #000000, 0px 0px 40px #000000;
 }
+.drop-shadow {
+	-webkit-box-shadow: 0px 0px 15px 5px #000000;
+	box-shadow: 0px 0px 15px 5px #000000;
+}
 /* Specifics */
-.App{
+.App {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 5em 25em 5em 1fr 10em;
@@ -98,5 +102,5 @@ a {
 		"Footer";
 }
 ::-webkit-scrollbar {
-    display: none;
+	display: none;
 }

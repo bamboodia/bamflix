@@ -3,7 +3,8 @@ import "./Modal.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovies, toggleMovieDetails } from "../../store/moviesSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faCalendarDays, faStopwatch, faStar } from "@fortawesome/free-solid-svg-icons";
+import { convertMinsToHrsMins, truncate } from "../../common/utilities.js";
 
 const Modal = () => {
 	const selectedMovies = useSelector(selectMovies);
@@ -15,21 +16,40 @@ const Modal = () => {
 
 	return (
 		<div className={showModal} onClick={() => dispatch(toggleMovieDetails())}>
-			<div className="modal" onClick={(e) => e.stopPropagation()}>
+			<div className="modal drop-shadow" onClick={(e) => e.stopPropagation()}>
 				<div className="banner">
 					<img src={imgUrl} alt="" />
+				</div>{" "}
+				<div className="title">
+					<div className="text-shadow">{details.title}</div>
+					<div className="tagline text-shadow">{details.tagline}</div>
 				</div>
-				<div className="title text-shadow">{details.title}</div>
 				<FontAwesomeIcon className="exit-modal" icon={faXmark} onClick={() => dispatch(toggleMovieDetails())} />
 				<div className="details">
 					<div className="info">
-						<div className="meta"></div>
-						<div className="plot"></div>
+						<div className="meta split">
+							<div className="year meta-child">
+								<FontAwesomeIcon icon={faCalendarDays} /> {details.release_date.slice(0, -6)}
+							</div>{" "}
+							<div className="runtime meta-child">
+								<FontAwesomeIcon icon={faStopwatch} /> {convertMinsToHrsMins(details.runtime)}{" "}
+							</div>
+							<div className="rating meta-child">
+								<FontAwesomeIcon className="rating-star" icon={faStar} size="xs" />
+								{details.vote_average}
+							</div>
+						</div>
+						<div className="plot"> {truncate(details.overview)} </div>
 					</div>
 					<div className="prod">
-						<div className="cast"></div>
+						<div className="cast">
+							<span className="tag-name">Cast: </span>{" "}
+							{details.cast.slice(0, 4).map((person, index) => (
+								<span key={person.id}>{person.name}, </span>
+							))}{" "}
+							<span>more...</span>
+						</div>
 						<div className="genres">
-                            <span className="tag-name">Cast:</span>
 							<span className="tag-name">Genres:</span>{" "}
 							{details.genres.map((genre, index) => (
 								<span key={genre.id}>{(index ? ", " : "") + genre.name}</span>

@@ -13,11 +13,7 @@ const MovieCard = (props) => {
 			<div className="title">{movie.title}</div>
 			<div className="">
 				<img src={imgUrl} alt={movie.Title} />
-			</div>
-			<div className="rating">
-				<FontAwesomeIcon className="rating-star" icon={faStar} size="xs" />
-				{movie.vote_average}
-			</div>
+			</div>			
 		</div>
 	);
 };

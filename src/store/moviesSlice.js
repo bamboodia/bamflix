@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchHotMovies, fetchMovieDetails, fetchNewMovies, fetchCast } from "../common/apis/movieApi";
+import { fetchHotMovies, fetchMovieDetails, fetchNewMovies, fetchCast, fetchImages } from "../common/apis/movieApi";
 
 const initialState = {
 	movies: { hotMovies: [[]], newMovies: [[]] },
@@ -38,7 +38,7 @@ const moviesSlice = createSlice({
 		setMovieDetails: (state, action) => {
 			state.movieDetailsFailed = false;
 			state.movieDetailsLoading = false;
-			state.details = action.payload.movieDetails;
+			state.details = action.payload;
 		},
 		getMovieDetailsFailed: (state) => {
 			state.movieDetailsFailed = true;
@@ -76,8 +76,11 @@ export const fetchDetails = (index, id) => async (dispatch) => {
 		dispatch(getMovieDetailsLoading());
 		const movieDetails = await fetchMovieDetails(id);
 		const movieCast = await fetchCast(id);
-		console.log(movieCast);		
-		dispatch(setMovieDetails({ movieDetails }));
+		const images = await fetchImages(id);
+		const movieDetailsWithCast = Object.assign(movieDetails, movieCast, images);
+		console.log(movieDetails);
+		console.log(movieDetailsWithCast);
+		dispatch(setMovieDetails(movieDetailsWithCast));
 		dispatch(toggleMovieDetails());
 	} catch (err) {
 		console.log(err);
