@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { MovieSlider, TVSlider } from "../../common/Sliders";
-import { getMovies, getTVShows, selectMovies } from "../../store/moviesSlice";
+import { selectMovies } from "../../store/moviesSlice";
 import "./Home.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -9,16 +9,8 @@ import Modal from "../Modal/Modal";
 import Hero from "../Hero/Hero";
 
 export const Home = () => {
-	const options = useSelector((state) => state.options);
-	const dispatch = useDispatch();
 	const selectedMovies = useSelector(selectMovies);
-
 	const { isLoading, showingDetails } = selectedMovies;
-
-	useEffect(() => {
-		dispatch(getMovies());
-		dispatch(getTVShows());
-	}, [dispatch]);
 
 	const displayModal = () => {
 		if (showingDetails) {
@@ -59,15 +51,8 @@ export const Home = () => {
 };
 
 export const Films = () => {
-	const options = useSelector((state) => state.options);
-	const dispatch = useDispatch();
 	const selectedMovies = useSelector(selectMovies);
-
 	const { isLoading, showingDetails } = selectedMovies;
-
-	useEffect(() => {
-		dispatch(getMovies());
-	}, [dispatch]);
 
 	const displayModal = () => {
 		if (showingDetails) {
@@ -100,6 +85,8 @@ export const Films = () => {
 					{loading()}
 					<MovieSlider movies={selectedMovies.movies.hotMovies} title={"Top Movies"} />
 					<MovieSlider movies={selectedMovies.movies.newMovies} title={"New Movies"} />
+					<MovieSlider movies={selectedMovies.movies.family} title={"Family Movies"} />
+					<MovieSlider movies={selectedMovies.movies.action} title={"Action Movies"} />
 				</div>
 			</div>
 			<Footer />
@@ -108,15 +95,8 @@ export const Films = () => {
 };
 
 export const TV = () => {
-	const options = useSelector((state) => state.options);
-	const dispatch = useDispatch();
 	const selectedMovies = useSelector(selectMovies);
-
 	const { isLoading, showingDetails } = selectedMovies;
-
-	useEffect(() => {
-		dispatch(getTVShows());
-	}, [dispatch]);
 
 	const displayModal = () => {
 		if (showingDetails) {

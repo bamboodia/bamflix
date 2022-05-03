@@ -4,11 +4,12 @@ $duration: 250ms;
 	z-index: 3;
 	overflow: visible;
 	transition: $duration all;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 
 	.list-title {
 		position: relative;
 		left: 2rem;
+		font-size: 1.2rem;
 	}
 }
 

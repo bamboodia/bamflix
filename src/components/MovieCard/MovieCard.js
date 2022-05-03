@@ -5,7 +5,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const MovieCard = (props) => {
 	const { movie, onToggleDetails } = props;
-	const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+	const baseImgUrl = "https://image.tmdb.org/t/p/w780";
 	const imgUrl = `${baseImgUrl}${movie.backdrop_path}`;
 
 	return (

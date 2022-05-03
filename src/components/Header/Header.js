@@ -39,9 +39,7 @@ const Header = () => {
 					</Link>
 				</li>				
 			</ul>
-			<div className="user-image">
-				<img src={user} alt="user" />
-			</div>
+			
 		</div>
 	);
 };

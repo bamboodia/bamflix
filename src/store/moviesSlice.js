@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchHotMovies, fetchNewMovies, fetchHotTV, fetchMovieDetails, fetchDetailsTV, fetchCast, fetchTVCast, fetchNewTV} from "../common/apis/movieApi";
+import { fetchHotMovies, fetchNewMovies, fetchActionMovies, fetchHotTV, fetchMovieDetails, fetchDetailsTV, fetchCast, fetchTVCast, fetchNewTV } from "../common/apis/movieApi";
 
 const initialState = {
-	movies: { hotMovies: [[]], newMovies: [[]]},
-	tvShows: { hotTV: [[]], newTV: [[]],},
+	movies: { hotMovies: [[]], newMovies: [[]], action: [[]], adventure: [[]], animation: [[]], comedy: [[]], crime: [[]], documentaries: [[]], drama: [[]], family: [[]], fantasy: [[]], history: [[]], horror: [[]], music: [[]], mystery: [[]], romance: [[]], sci_fi: [[]], thriller: [[]], war: [[]], western: [[]] },
+	tvShows: { hotTV: [[]], newTV: [[]] },
 	details: {},
 	showingDetails: false,
 	movieDetailsFailed: false,
@@ -63,13 +63,17 @@ export default moviesSlice.reducer;
 export const getMovies = () => async (dispatch) => {
 	try {
 		dispatch(getMoviesLoading());
-		const movies = { hotMovies: [], newMovies: [] };
+		const movies = { hotMovies: [], newMovies: [], action: [], adventure: [], animation: [], comedy: [], crime: [], documentaries: [], drama: [], family: [], fantasy: [], history: [], horror: [], music: [], mystery: [], romance: [], sci_fi: [], thriller: [], war: [], western: [] };
 		const hotMovies = await fetchHotMovies();
 		const hotMoviesValid = hotMovies.filter((movie) => movie.backdrop_path !== null);
 		const newMovies = await fetchNewMovies();
 		const newMoviesValid = newMovies.filter((movie) => movie.backdrop_path !== null);
+		const actionMovies = await fetchHotMovies(28, 10751);
+		const familyMovies = await fetchHotMovies(10751);
 		movies.hotMovies.push(hotMoviesValid);
 		movies.newMovies.push(newMoviesValid);
+		movies.action.push(actionMovies);
+		movies.family.push(familyMovies)
 		dispatch(setMovies(movies));
 	} catch (err) {
 		console.log(err);
@@ -82,14 +86,11 @@ export const getTVShows = () => async (dispatch) => {
 		dispatch(getMoviesLoading());
 		const movies = { hotTV: [], newTV: [] };
 		const hotMovies = await fetchHotTV();
-		console.log(hotMovies)
 		const hotMoviesValid = hotMovies.filter((movie) => movie.backdrop_path !== null);
-		console.log(hotMoviesValid)
 		const newMovies = await fetchNewTV();
 		const newMoviesValid = newMovies.filter((movie) => movie.backdrop_path !== null);
 		movies.hotTV.push(hotMoviesValid);
 		movies.newTV.push(newMoviesValid);
-		console.log(movies)
 		dispatch(setTVShows(movies));
 	} catch (err) {
 		console.log(err);
@@ -118,7 +119,7 @@ export const fetchTVDetails = (index, id) => async (dispatch) => {
 		dispatch(getMovieDetailsLoading());
 		const movieDetails = await fetchDetailsTV(id);
 		const movieCast = await fetchTVCast(id);
-		const movieDetailsWithCast = Object.assign(movieDetails, movieCast);		
+		const movieDetailsWithCast = Object.assign(movieDetails, movieCast);
 		movieDetailsWithCast["release_date"] = movieDetailsWithCast["last_air_date"];
 		delete movieDetailsWithCast["last_air_date"];
 		movieDetailsWithCast["runtime"] = movieDetailsWithCast["episode_run_time"];

@@ -5,7 +5,7 @@ const Hero = () => {
 	return (
 		<div className="hero">
 			<div className="gradient"></div>
-			<div className="banner-img"><img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/fall-movies-index-1628968089.jpg" alt="" /></div>
+			<div className="banner-img"><img src="https://image.tmdb.org/t/p/original/aEGiJJP91HsKVTEPy1HhmN0wRLm.jpg" alt="" /></div>
 		</div>
 	);
 };

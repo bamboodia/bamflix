@@ -11,7 +11,7 @@ const Modal = () => {
 	const { showingDetails, details } = selectedMovies;
 	const dispatch = useDispatch();
 	const showModal = showingDetails ? "modal-wrapper show" : "modal hide";
-	const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+	const baseImgUrl = "https://image.tmdb.org/t/p/w1280";
 	const imgUrl = `${baseImgUrl}${details.backdrop_path}`;
 
 	return (

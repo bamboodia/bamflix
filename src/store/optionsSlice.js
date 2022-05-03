@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getGenres} from "../common/apis/movieApi";
 
 const initialState = {
 	searchTerm: "",
-	genres: [],
+	genres: undefined,
 	type: "movie",
 };
 
@@ -21,5 +22,16 @@ const optionsSlice = createSlice({
 		},
 	},
 });
+
+export const {setGenres} = optionsSlice.actions
+
+export const fetchGenres = () => async (dispatch) => {
+	try {
+		const genres = await getGenres();
+		dispatch(setGenres(genres))
+	} catch (err) {
+		console.log(err);
+	}
+}
 
 export default optionsSlice.reducer;
