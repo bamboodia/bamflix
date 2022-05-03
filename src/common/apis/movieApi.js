@@ -15,7 +15,6 @@ export const getGenres = async () => {
 	const response= await movieApi.get(`/genre/movie/list?api_key=${APIKey}&language=en-US`).catch(err => {
 		console.log("Err:",err)
 	});
-	console.log(response);
 	return response.data.genres
 }
 

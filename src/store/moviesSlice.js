@@ -5,6 +5,7 @@ const initialState = {
 	movies: { hotMovies: [[]], newMovies: [[]], action: [[]], adventure: [[]], animation: [[]], comedy: [[]], crime: [[]], documentaries: [[]], drama: [[]], family: [[]], fantasy: [[]], history: [[]], horror: [[]], music: [[]], mystery: [[]], romance: [[]], sci_fi: [[]], thriller: [[]], war: [[]], western: [[]] },
 	tvShows: { hotTV: [[]], newTV: [[]] },
 	details: {},
+	topMovie: {backdrop_path: '', title: ''},
 	showingDetails: false,
 	movieDetailsFailed: false,
 	movieDetailsLoading: false,
@@ -28,6 +29,7 @@ const moviesSlice = createSlice({
 			state.isLoading = false;
 			state.error = false;
 			state.movies = action.payload;
+			state.topMovie = action.payload.hotMovies[0][0]
 		},
 		toggleMovieDetails: (state, action) => {
 			state.showingDetails = !state.showingDetails;
@@ -104,8 +106,6 @@ export const fetchDetails = (index, id) => async (dispatch) => {
 		const movieDetails = await fetchMovieDetails(id);
 		const movieCast = await fetchCast(id);
 		const movieDetailsWithCast = Object.assign(movieDetails, movieCast);
-		console.log(movieDetails);
-		console.log(movieDetailsWithCast);
 		dispatch(setMovieDetails(movieDetailsWithCast));
 		dispatch(toggleMovieDetails());
 	} catch (err) {
@@ -124,7 +124,6 @@ export const fetchTVDetails = (index, id) => async (dispatch) => {
 		delete movieDetailsWithCast["last_air_date"];
 		movieDetailsWithCast["runtime"] = movieDetailsWithCast["episode_run_time"];
 		delete movieDetailsWithCast["episode_run_time"];
-		console.log(movieDetailsWithCast);
 		dispatch(setMovieDetails(movieDetailsWithCast));
 		dispatch(toggleMovieDetails());
 	} catch (err) {
